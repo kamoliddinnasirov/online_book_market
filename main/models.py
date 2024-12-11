@@ -62,6 +62,11 @@ class Book(models.Model):
     photo = models.ImageField(upload_to='Book/%Y/%m/%d')
 
 
+    def display_author(self):
+        return ', '.join([author.last_name for author in self.author.all() ])
+    
+    display_author.short_description = 'Authors'
+
     def __str__(self) -> str:
         return self.title 
     
@@ -71,3 +76,30 @@ class Book(models.Model):
 
 
 
+
+class Status(models.Model):
+    name = models.CharField(max_length=200, help_text='Input status book', verbose_name='Book status')
+
+
+
+    def __str__(self) -> str:
+        return self.name 
+    
+
+
+class BookInstance(models.Model):
+    book = models.ForeignKey('Book', on_delete=models.CASCADE, null=True)
+    inv_nom = models.CharField(max_length=20, null=True, help_text='Input inviroment number')
+    status = models.ForeignKey('Status', on_delete=models.CASCADE, help_text='Input status book')
+    due_back = models.DateField(null=True, blank=True, help_text='Input due end status')
+
+
+    def __str__(self):
+        return self.book 
+    
+
+
+    class Meta:
+        verbose_name = 'Book instance'
+        verbose_name_plural = 'Book instances'
+        ordering = ['due_back']

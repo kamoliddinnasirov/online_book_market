@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+</head>
+<body>
+    
+    <div class="container-fluid my-2">
+        <div class="row">
+            <div class="col text-center">
+                <h3>{{ text_head }}</h3>
+                <div>{{ text_body }}</div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
